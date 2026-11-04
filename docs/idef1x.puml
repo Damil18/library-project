@@ -1,0 +1,21 @@
+@startuml
+entity "Книга" as Book {
+  * ISBN
+  --
+  Название
+  Автор
+}
+entity "Читатель" as Reader {
+  * ID
+  --
+  ФИО
+}
+entity "Выдача" as Loan {
+  * ID
+  --
+  ЧитательID
+  ISBN
+}
+Book ||--o{ Loan
+Reader ||--o{ Loan
+@enduml

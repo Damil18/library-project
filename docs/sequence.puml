@@ -1,0 +1,12 @@
+@startuml
+actor "Библиотекарь" as L
+participant "LoanController" as C
+participant "LoanService" as S
+participant "SQLite" as DB
+L -> C : POST /loans
+C -> S : issue_book()
+S -> DB : INSERT INTO loans
+DB --> S : OK
+S --> C : Loan Object
+C --> L : 201 Created
+@enduml
