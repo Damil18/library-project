@@ -1,7 +1,9 @@
 """Application entry point."""
 from flask import Flask, jsonify
-
 from books.routes import bp as books_bp
+from readers.routes import bp as readers_bp
+from loans.routes import bp as loans_bp
+from reports.routes import bp as reports_bp
 from core.config import Config
 from core.db import close_db, init_db
 from core.exceptions import AppError
@@ -16,6 +18,9 @@ def create_app(config=None):
         app.config.from_object(config)
 
     app.register_blueprint(books_bp)
+    app.register_blueprint(readers_bp)
+    app.register_blueprint(loans_bp)
+    app.register_blueprint(reports_bp)
 
     @app.errorhandler(AppError)
     def handle_app_error(error):
@@ -26,12 +31,9 @@ def create_app(config=None):
         return jsonify({"status": "ok"})
 
     app.teardown_appcontext(close_db)
-
     with app.app_context():
         init_db()
-
     return app
-
 
 if __name__ == "__main__":
     app = create_app()
