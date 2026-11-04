@@ -1,0 +1,9 @@
+[project]
+name = "library-project"
+version = "0.1.0"
+description = "Library management system"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "books/tests"]
+addopts = "-v"
